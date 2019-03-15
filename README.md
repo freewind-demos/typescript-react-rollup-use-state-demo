@@ -1,12 +1,29 @@
-JavaScript React State Hook Demo
-=================================
+JavaScript React Rollup "useState" Demo
+=======================================
 
-React `16.8`中引入了`State Hook`，可以让我们以Function的形式定义组件，并且处理与state相关的操作。
-
-由于它对每一个state直接暴露出了相应的getter/setter，使用起来很方便。
-
+Not sure why the code can't be bundled by rollup.
 
 ```
 npm install
 npm run demo
 ```
+
+It will fail with error: 
+
+```
+index.ts → bundle.js...
+[!] Error: 'useState' is not exported by node_modules/react/index.js
+https://rollupjs.org/guide/en#error-name-is-not-exported-by-module-
+index.ts (1:8)
+1: import {useState} from "react";
+           ^
+2: 
+3: console.log(useState);
+Error: 'useState' is not exported by node_modules/react/index.js
+
+```
+
+If we want to fix it, we have to remove `resolve()` from `rollup.config.js`, 
+but which is required in my real project.
+
+What's the error cause and how to fix it?

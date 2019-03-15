@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "target": "es6",
-    "module": "amd",
+    "module": "esnext",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
