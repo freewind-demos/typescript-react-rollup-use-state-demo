@@ -1,14 +1,15 @@
 JavaScript React Rollup "useState" Demo
 =======================================
 
-Not sure why the code can't be bundled by rollup.
+关键点有两个：
+
+1. rollup.config.js中需要声明：
 
 ```
-npm install
-npm run demo
+namedExports: { 'react': ['useState'] }
 ```
 
-It will fail with error: 
+否则会报错：
 
 ```
 index.ts → bundle.js...
@@ -23,7 +24,25 @@ Error: 'useState' is not exported by node_modules/react/index.js
 
 ```
 
-If we want to fix it, we have to remove `resolve()` from `rollup.config.js`, 
-but which is required in my real project.
+2. 使用npm/yarn，而不是pnpm
 
-What's the error cause and how to fix it?
+pnpm由于使用了hard link，导致`rollup-plugin-commonjs`无法正常的定位`react`，
+所以即使像上面那样声明了，依然会报错。
+
+需要改成：
+
+```
+namedExports: {
+   'node_modules/.npm-registry.compass.com/react/16.8.4/node_modules/react/index.js
+': ['useState']
+}
+```
+
+可以看到里面嵌入了缓存路径和版本号，不可接受。
+
+## 运行：
+
+```
+npm install
+npm run demo
+```

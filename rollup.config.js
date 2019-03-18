@@ -12,7 +12,11 @@ export default {
   ],
   plugins: [
     resolve(),
-    commonjs(),
+    commonjs({
+      namedExports: {
+        'react': ['useState']
+      }
+    }),
     typescript(),
   ]
 };
